@@ -181,6 +181,85 @@ let cars1 = [
 console.log(cars1)
 
 
+// створити класс/функцію конструктор попелюшка з полями ім'я, вік, розмір ноги. Створити масив з 10 попелюшок.
+// Сторити об'єкт класу "принц" за допомоги класу який має поля ім'я, вік, туфелька яку він знайшов.
+// 	За допомоги циклу знайти яка попелюшка повинна бути з принцом.
+// 	Додатково, знайти необхідну попелюшку за допомоги функції масиву find та відповідного колбеку
+
+
+function Cinderella(name, age, sizeLeg) {
+	this.name = name;
+	this.age = age;
+	this.sizeLeg = sizeLeg;
+}
+
+const cinderellas = [
+	new Cinderella('Cirila', 18, 35),
+	new Cinderella('Anastasia', 19, 36),
+	new Cinderella('Bella', 20, 37),
+	new Cinderella('Diana', 21, 38),
+	new Cinderella('Elena', 22, 39),
+	new Cinderella('Fiona', 18, 35),
+	new Cinderella('Gabriella', 23, 40),
+	new Cinderella('Hanna', 24, 41),
+	new Cinderella('Isabella', 25, 36),
+	new Cinderella('Julia', 26, 37)
+]
+
+console.log(cinderellas)
+
+function Prince(name, age, findSlipper) {
+	this.name = name;
+	this.age = age;
+	this.findSlipper = findSlipper;
+
+	this.findCinderella = function (cinderellas) {
+		for (const cinderella of cinderellas) {
+			if (cinderella.sizeLeg === this.findSlipper) {
+				return cinderella
+			}
+
+		}
+		return "Didn't find Cinderella"
+	};
+
+	this.findCinderella2 = function (cinderellas) {
+		return cinderellas.find(item => item.sizeLeg === this.findSlipper);
+	}
+}
+
+let prince = new Prince("Prince", 25, 36);
+
+const foundCinderella = prince.findCinderella(cinderellas);
+const foundCinderella2 = prince.findCinderella2(cinderellas);
+
+console.log(foundCinderella);
+console.log(foundCinderella2);
+
+
+// Через Array.prototype. створити власний foreach, filter
+
+
+Array.prototype.myForEach = function (callback) {
+	for (let i = 0; i < this.length; i++) {
+		callback(this[i], i, this);
+	}
+}
+
+cinderellas.myForEach(i => console.log(i));
+
+Array.prototype.myFilter = function (callback) {
+	let arr = []
+	for (let i = 0; i < this.length; i++) {
+
+		if (callback(this[i], i, this)) arr.push(this[i])
+
+	}
+	return arr;
+}
+
+console.log(cinderellas.myFilter(i => i.sizeLeg === 35));
+
 
 
 
