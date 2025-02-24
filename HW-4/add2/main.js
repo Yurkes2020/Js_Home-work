@@ -10,7 +10,7 @@
 // EXAMPLE: [ 1, 2, 3, 5, 7, 9, 56, 8, 67 ] -> Має бути виведено 1, 9, 56
 // 6. Є масив з числами [100,250,50,168,120,345,188], Які характеризують вартість окремої покупки. Обрахувати середній чек.
 //
-// 7. Створити масив з рандомними значеннями, помножити всі його елементи на 5 та перемістити їх в інший масив.!!!!!!!!!!!!!!!!!!!!
+// 7. Створити масив з рандомними значеннями, помножити всі його елементи на 5 та перемістити їх в інший масив.
 // 8. Створити масив з будь якими значеннями (стрінги, числа, і тд...). пройтись по ньому, і якщо елемент є числом - додати його в інший масив.
 
 let arr = []
@@ -56,7 +56,15 @@ let arr = []
 // console.log(arr)
 // console.log(newArr)
 
-let arr2 = [100, 250, 50, 168, 120, 345, 188]
+// let arr2 = [100, 250, 50, 168, 120, 345, 188]
 
-let average = arr2.reduce((acc, cur) => acc + cur, 0)/ arr2.length
-console.log(average)
+// let average = arr2.reduce((acc, cur) => acc + cur, 0)/ arr2.length
+// console.log(average)
+
+// let newArr = arr2.map(item => item*5)
+// console.log(newArr);
+
+let array = [1, 2, 3, 4, 5, 'a', 'b', 'c', false, false, true, {}, [], undefined, NaN];
+
+let newArr = array.filter(item => Number.isFinite(item));
+console.log(newArr);
