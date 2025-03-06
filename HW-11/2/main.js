@@ -5,7 +5,10 @@
 const getRecipes = async () => {
 	try {
 		const res = await fetch('https://dummyjson.com/recipes');
-		if (!res.ok) throw new Error(`Помилка: ${res.status}`);
+		if (!res.ok) {
+			console.error(`Помилка: ${res.status}`);
+			return null; // Просто повертаємо null без throw
+		}
 		const {recipes} = await res.json();
 		return recipes;
 	} catch (err) {
