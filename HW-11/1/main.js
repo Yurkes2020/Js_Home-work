@@ -4,18 +4,28 @@
 // 	#whXxOBlYS0H
 // 	- взяти https://dummyjson.com/docs/recipes та вивести інформацію про всі рецепти. Інгредієнти повинні бути список під час відображення.
 
-const carts = async () => {
-	 return await  fetch('https://dummyjson.com/carts')
-		.then(res => res.json())
-		.then(data => data)
-		.catch(err => console.log(err));
-}
+const getCarts = async () => {
+	try {
+		const res = await fetch('https://dummyjson.com/carts');
+		if (!res.ok) throw new Error(`Помилка: ${res.status}`);
+		const {carts} = await res.json();
+		return carts;
+	} catch (err) {
+		console.error('Помилка при отриманні даних:', err);
+		return null;
+	}
+};
 
 
-carts().then(({carts}) => {
+const renderCarts = async () => {
+	let carts = await getCarts();
+	if (!carts) {
+		document.body.innerHTML = '<p style="color: red;">Не вдалося завантажити кошики. Спробуйте ще раз.</p>';
+		return;
+	}
 
-	carts.map(({products}) => {
-		for (let product of products) {
+	carts.forEach(({products}) => {
+		products.forEach(product => {
 
 			let div = document.createElement('div');
 			let title = document.createElement('h2');
@@ -23,11 +33,13 @@ carts().then(({carts}) => {
 			let img = document.createElement('img');
 
 			title.innerText = product.title;
-			text.innerText = product.price;
+			text.innerText = `${product.price} $`;
 			img.setAttribute('src', product.thumbnail);
 
 			document.body.appendChild(div);
-			div.append(title,img,text);
-		}
-	})
-})
+			div.append(title, img, text);
+		})}
+	)
+}
+
+renderCarts()
