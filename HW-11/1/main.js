@@ -5,7 +5,10 @@
 const getCarts = async () => {
 	try {
 		const res = await fetch('https://dummyjson.com/carts');
-		if (!res.ok) throw new Error(`Помилка: ${res.status}`);
+		if (!res.ok) {
+			console.error(`Помилка: ${res.status}`);
+			return null; // Повертаємо null без throw
+		}
 		const {carts} = await res.json();
 		return carts;
 	} catch (err) {
@@ -36,8 +39,8 @@ const renderCarts = async () => {
 
 			document.body.appendChild(div);
 			div.append(title, img, text);
-		})}
-	)
+		})
+	})
 }
 
 renderCarts()
