@@ -15,7 +15,7 @@ const getRecipes = async () => {
 };
 
 
-const renderCarts = async () => {
+const renderRecipes = async () => {
 	let recipes = await getRecipes();
 
 	if (!recipes) {
@@ -59,5 +59,5 @@ const renderCarts = async () => {
 	})
 }
 
-renderCarts()
+renderRecipes()
 
