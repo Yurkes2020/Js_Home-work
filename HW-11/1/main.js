@@ -7,7 +7,7 @@ const getCarts = async () => {
 		const res = await fetch('https://dummyjson.com/carts');
 		if (!res.ok) {
 			console.error(`Помилка: ${res.status}`);
-			return null; // Повертаємо null без throw
+			return null; 
 		}
 		const {carts} = await res.json();
 		return carts;
